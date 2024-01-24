@@ -85,6 +85,16 @@
 
 Настройте дешборды с отображением метрик, минимальный набор — по принципу USE (Utilization, Saturation, Errors) для CPU, RAM, диски, сеть, http запросов к веб-серверам. Добавьте необходимые tresholds на соответствующие графики.
 
+### Реализация мониторинга
+
+Поднят zabbix-server и установлены агенты на каждую ВМ при помощи Ansible.
+Доступ в [Zabbix](http://51.250.40.164:8080/) 
+Логин и пароль: Admin/zabbix
+
+![Zabbix Dashbord](https://github.com/DedovSG/sys-diplomDedovSG/blob/diplom-zabbix/Screenshots/ZabbixDash.png)
+
+![Zabbix Hosts](https://github.com/DedovSG/sys-diplomDedovSG/blob/diplom-zabbix/Screenshots/ZabbixHosts.png)
+
 ### Логи
 Cоздайте ВМ, разверните на ней Elasticsearch. Установите filebeat в ВМ к веб-серверам, настройте на отправку access.log, error.log nginx в Elasticsearch.
 
