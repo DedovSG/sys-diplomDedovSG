@@ -133,8 +133,16 @@ ELF был развернут посредством Ansible, с использ�
 
 ![VPCsecgroup](https://github.com/DedovSG/sys-diplomDedovSG/blob/diplom-zabbix/Screenshots/VPCsecgroup.png)
 
+Настроена ВМ с Bastion host, с публичным ip-адресом и открытым ssh-портом, подключение ansible осуществляется через эту ВМ, сам Ansible распологается на домашней машине с WSL.
+
+Данные для подключения и выполнения скриптов ansible лежат в файле hosts.
+
 ### Резервное копирование
 Создайте snapshot дисков всех ВМ. Ограничьте время жизни snaphot в неделю. Сами snaphot настройте на ежедневное копирование.
+
+![Snapshots](https://github.com/DedovSG/sys-diplomDedovSG/blob/diplom-zabbix/Screenshots/Snapshots.png)
+
+![Dailysnapshot](https://github.com/DedovSG/sys-diplomDedovSG/blob/diplom-zabbix/Screenshots/Dailysnapshot.png)
 
 ### Дополнительно
 Не входит в минимальные требования. 
