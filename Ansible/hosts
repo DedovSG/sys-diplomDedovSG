@@ -11,6 +11,9 @@ elastic ansible_host=elasticsearch.ru-central1.internal ansible_ssh_private_key_
 [kibana]
 kibana ansible_host=kibana.ru-central1.internal ansible_ssh_private_key_file=/home/dedovsg/.ssh/dedovsg ansible_user=dedovsg
 
+[bastion]
+bastion bastion_host=bastion.ru-central1.internal ansible_ssh_private_key_file=/home/dedovsg/.ssh/dedovsg ansible_user=dedovsg
+
 [nginx:vars]
 ansible_ssh_common_args='-o ProxyCommand="ssh -i /home/dedovsg/.ssh/dedovsg -W %h:%p -q dedovsg@51.250.38.141"'
 
@@ -21,4 +24,7 @@ ansible_ssh_common_args='-o ProxyCommand="ssh -i /home/dedovsg/.ssh/dedovsg -W %
 ansible_ssh_common_args='-o ProxyCommand="ssh -i /home/dedovsg/.ssh/dedovsg -W %h:%p -q dedovsg@51.250.38.141"'
 
 [kibana:vars]
+ansible_ssh_common_args='-o ProxyCommand="ssh -i /home/dedovsg/.ssh/dedovsg -W %h:%p -q dedovsg@51.250.38.141"'
+
+[bastion:vars]
 ansible_ssh_common_args='-o ProxyCommand="ssh -i /home/dedovsg/.ssh/dedovsg -W %h:%p -q dedovsg@51.250.38.141"'
