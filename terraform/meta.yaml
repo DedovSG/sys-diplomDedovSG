@@ -1,0 +1,14 @@
+#cloud-config
+
+users:
+ - name: dedovsg
+   groups: sudo
+   shell: /bin/bash
+   sudo: ['ALL=(ALL) NOPASSWD:ALL']
+   ssh-authorized-keys:
+     - ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIALEV1VdJZqmUQ2TWV7yUnlyTOm29ANpNvjsgWlaofWo dedovsg@delta-001
+chpasswd:
+  list: |
+    dedovsg:sys-23
+  expire: False
+

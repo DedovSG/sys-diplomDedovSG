@@ -1,0 +1,24 @@
+[nginx]
+nginx1   ansible_host=nginx1.ru-central1.internal ansible_ssh_private_key_file=/home/dedovsg/.ssh/dedovsg ansible_user=dedovsg
+nginx2   ansible_host=nginx2.ru-central1.internal ansible_ssh_private_key_file=/home/dedovsg/.ssh/dedovsg ansible_user=dedovsg
+
+[zabbix]
+zabbix   ansible_host=zabbix.ru-central1.internal ansible_ssh_private_key_file=/home/dedovsg/.ssh/dedovsg ansible_user=dedovsg
+
+[elastic]
+elastic ansible_host=elasticsearch.ru-central1.internal ansible_ssh_private_key_file=/home/dedovsg/.ssh/dedovsg ansible_user=dedovsg
+
+[kibana]
+kibana ansible_host=kibana.ru-central1.internal ansible_ssh_private_key_file=/home/dedovsg/.ssh/dedovsg ansible_user=dedovsg
+
+[nginx:vars]
+ansible_ssh_common_args='-o ProxyCommand="ssh -i /home/dedovsg/.ssh/dedovsg -W %h:%p -q dedovsg@51.250.38.141"'
+
+[zabbix:vars]
+ansible_ssh_common_args='-o ProxyCommand="ssh -i /home/dedovsg/.ssh/dedovsg -W %h:%p -q dedovsg@51.250.38.141"'
+
+[elastic:vars]
+ansible_ssh_common_args='-o ProxyCommand="ssh -i /home/dedovsg/.ssh/dedovsg -W %h:%p -q dedovsg@51.250.38.141"'
+
+[kibana:vars]
+ansible_ssh_common_args='-o ProxyCommand="ssh -i /home/dedovsg/.ssh/dedovsg -W %h:%p -q dedovsg@51.250.38.141"'
