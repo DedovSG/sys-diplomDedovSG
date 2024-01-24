@@ -131,6 +131,7 @@ ELF был развернут посредством Ansible, с использ�
 
 ![Network](https://github.com/DedovSG/sys-diplomDedovSG/blob/diplom-zabbix/Screenshots/network1.png)
 
+![VPCsecgroup](https://github.com/DedovSG/sys-diplomDedovSG/blob/diplom-zabbix/Screenshots/VPCsecgroup.png)
 
 ### Резервное копирование
 Создайте snapshot дисков всех ВМ. Ограничьте время жизни snaphot в неделю. Сами snaphot настройте на ежедневное копирование.
