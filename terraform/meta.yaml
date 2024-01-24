@@ -7,8 +7,5 @@ users:
    sudo: ['ALL=(ALL) NOPASSWD:ALL']
    ssh-authorized-keys:
      - ssh-ed25519 
-chpasswd:
-  list: |
-    dedovsg:sys-23
-  expire: False
+
 
