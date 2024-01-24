@@ -49,6 +49,37 @@
 Протестируйте сайт
 `curl -v <публичный IP балансера>:80` 
 
+### Реализация сайта
+
+При помощи Terraform была поднята инфраструктура. ВМ nginx1 находится в зоне ru-central1-a, ВМ nginx2 - в зоне ru-central1-b, остальные ВМ размещены в зоне ru-central1-c.
+
+![Дашборд](https://github.com/DedovSG/sys-diplomDedovSG/blob/diplom-zabbix/Screenshots/VM-YandexCloud.png)
+
+![Список ВМ](https://github.com/DedovSG/sys-diplomDedovSG/blob/diplom-zabbix/Screenshots/VM-YandexCloud2.png)
+
+Создана Target Group и в неё включены две ВМ с nginx'ом
+
+![Target Group](https://github.com/DedovSG/sys-diplomDedovSG/blob/diplom-zabbix/Screenshots/tg-group.png)
+
+Создана Backend Group настроена на target group. Настроен healthcheck на корень (/) и порт 80, протокол HTTP.
+
+![Backend Group](https://github.com/DedovSG/sys-diplomDedovSG/blob/diplom-zabbix/Screenshots/be-group.png)
+
+Создан HTTP router. Путь указан — /, backend group — указанна.
+
+![HTTP-router](https://github.com/DedovSG/sys-diplomDedovSG/blob/diplom-zabbix/Screenshots/httprouter.png)
+
+Создан Application load balancer для распределения трафика на веб-сервера, созданные ранее. Указан HTTP router, созданный ранее, задан listener тип auto, порт 80.
+
+![Application load balancer](https://github.com/DedovSG/sys-diplomDedovSG/blob/diplom-zabbix/Screenshots/alb.png)
+
+Протестирован сайт с помощью curl 
+
+![Curl -v 158.160.140.152:80](https://github.com/DedovSG/sys-diplomDedovSG/blob/diplom-zabbix/Screenshots/curlNginx.png)
+
+Веб-морда
+![158.160.140.152](https://github.com/DedovSG/sys-diplomDedovSG/blob/diplom-zabbix/Screenshots/NGINX.png)
+
 ### Мониторинг
 Создайте ВМ, разверните на ней Zabbix. На каждую ВМ установите Zabbix Agent, настройте агенты на отправление метрик в Zabbix. 
 
