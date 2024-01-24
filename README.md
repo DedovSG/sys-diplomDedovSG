@@ -100,12 +100,41 @@ Cоздайте ВМ, разверните на ней Elasticsearch. Устан
 
 Создайте ВМ, разверните на ней Kibana, сконфигурируйте соединение с Elasticsearch.
 
+### Реализация мониторинга
+
+ELF был развернут посредством Ansible, с использованием ansible скриптов и копирования конфигов.
+Доступ в [Kibana](http://51.250.35.86:5601/)
+
+![ElasticDash](https://github.com/DedovSG/sys-diplomDedovSG/blob/diplom-zabbix/Screenshots/ElasticVisualization.png)
+
+![ElasticStream](https://github.com/DedovSG/sys-diplomDedovSG/blob/diplom-zabbix/Screenshots/ElasticStream.png)
+
 ### Сеть
 Разверните один VPC. Сервера web, Elasticsearch поместите в приватные подсети. Сервера Zabbix, Kibana, application load balancer определите в публичную подсеть.
 
 Настройте [Security Groups](https://cloud.yandex.com/docs/vpc/concepts/security-groups) соответствующих сервисов на входящий трафик только к нужным портам.
 
 Настройте ВМ с публичным адресом, в которой будет открыт только один порт — ssh.  Эта вм будет реализовывать концепцию  [bastion host]( https://cloud.yandex.ru/docs/tutorials/routing/bastion) . Синоним "bastion host" - "Jump host". Подключение  ansible к серверам web и Elasticsearch через данный bastion host можно сделать с помощью  [ProxyCommand](https://docs.ansible.com/ansible/latest/network/user_guide/network_debug_troubleshooting.html#network-delegate-to-vs-proxycommand) . Допускается установка и запуск ansible непосредственно на bastion host.(Этот вариант легче в настройке)
+
+### Реализация сети
+
+Развернут VPC:
+Сервера: nginx1 - приватная подсеть
+         nginx2 - приватная подсеть
+         elastic - приватная подсеть
+         zabbix - публичная подсеть
+         kibana - публичная подсеть
+Сервис:
+        application load balancer - публичная подсеть
+
+![VPC](https://github.com/DedovSG/sys-diplomDedovSG/blob/diplom-zabbix/Screenshots/VPC.png)
+
+![Network](https://github.com/DedovSG/sys-diplomDedovSG/blob/diplom-zabbix/Screenshots/network1.png)
+
+![ElasticStream](https://github.com/DedovSG/sys-diplomDedovSG/blob/diplom-zabbix/Screenshots/ElasticStream.png)
+
+![ElasticVisualization](https://github.com/DedovSG/sys-diplomDedovSG/blob/diplom-zabbix/Screenshots/ElasticVisualization.png)
+
 
 ### Резервное копирование
 Создайте snapshot дисков всех ВМ. Ограничьте время жизни snaphot в неделю. Сами snaphot настройте на ежедневное копирование.
