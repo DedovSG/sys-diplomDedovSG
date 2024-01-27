@@ -1,32 +1,35 @@
 ---
 - name: Install filebeats
-  hosts: nginx
+  hosts: elastic
   become: true
 
   tasks:
+    - name: Update apt cache
+      apt:
+        update_cache: yes
+
     - name: Install gnupg, apt-transport-https
       apt:
         name:
           - apt-transport-https
           - gnupg
         state: present
+    
+    - name: Import Filebeat GPG key
+      ansible.builtin.apt_key:
+        url: https://artifacts.elastic.co/GPG-KEY-elasticsearch
+        state: present
+      ignore_errors: yes
 
-    - name: Copy distrib
-      copy:
-        src: /home/dedovsg/elk/filebeat-7.17.9-amd64.deb
-        dest: /home
-
-    - name: Copy sha
-      copy:
-        src: /home/dedovsg/elk/filebeat-7.17.9-amd64.deb.sha512
-        dest: /home
+    - name: Add Filebeat repository
+      ansible.builtin.apt_repository:
+        repo: "deb https://mirror.yandex.ru/mirrors/elastic/7/ stable main"
+        state: present
 
     - name: Install filebeat
-      shell: |
-         wget -qO - https://artifacts.elastic.co/GPG-KEY-elasticsearch | sudo apt-key add
-         echo "deb [trusted=yes] https://mirror.yandex.ru/mirrors/elastic/7/ stable main" | sudo tee -a /etc/apt/sources.list.d/elastic-7.x.list
-         sudo apt-get update && sudo apt-get install filebeat
-         sudo systemctl enable filebeat
+      ansible.builtin.apt:
+        name: filebeat
+        state: present
 
     - name: Copy config file for filebeat
       copy:
